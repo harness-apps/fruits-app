@@ -14,7 +14,9 @@ dockercfg: ""
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-
+extraSecretNamesForEnvFrom: []
+# - mongodb-connection-secret
+# - db-connection-secret
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
