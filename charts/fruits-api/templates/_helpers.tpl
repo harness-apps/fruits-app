@@ -64,3 +64,12 @@ Create the name of the db-connection secret
 {{- printf "%s-db-connection-credentials" (include "fruits-api.fullname" .) }}
 {{- end }}
 
+{{/*
+Create the name of the db-connection secret
+*/}}
+{{- define "fruits-api.mongoDBConnectionParams" -}}
+{{ range .Values.mongoDBConnectionParams -}}
+  {{- printf "{\"%s\": \"%s\"}" .name .value  | b64enc }}
+{{- end }}
+{{- end }}
+
