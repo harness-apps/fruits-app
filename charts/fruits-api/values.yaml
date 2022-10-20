@@ -53,14 +53,16 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-livenessProbe:
-  httpGet:
-    path: /q/health/live
-    port: http
-readinessProbe:
-  httpGet:
-    path: /q/health/ready
-    port: http
+probes: {}
+  # It is recommended to have liveness and readiness probes defined to have proper update of applications without service disruptions
+  # livenessProbe:
+  #   httpGet:
+  #     path: /q/health/live
+  #     port: http
+  # readinessProbe:
+  #   httpGet:
+  #     path: /q/health/ready
+  #     port: http
 
 nodeSelector: {}
 

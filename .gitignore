@@ -1,2 +1,6 @@
 secrets
-.envrc
+.envrc*
+.env*
+
+# Chart dependencies
+**/charts/*.tgz

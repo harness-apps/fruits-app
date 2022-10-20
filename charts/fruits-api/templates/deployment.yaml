@@ -35,8 +35,9 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- toYaml .Values.livenessProbe | nindent 10 }}
-          {{- toYaml .Values.readinessProbe | nindent 10 }}
+          {{- if .Values.probes }}
+          {{- toYaml .Values.probes | nindent 10 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

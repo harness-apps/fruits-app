@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  fruits-api:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-20T12:37:31.211803+05:30"
+    description: 'Helm Charts that will be used to deploy fruits app(API,UI). The
+      fruits app will be used to demonstrate various features of Harness CI/CD. '
+    digest: ee6d37a39cc2b658ff7c59c0495db3a3f72bf645e05b87eda39224a4195d93e6
+    name: fruits-api
+    type: application
+    urls:
+    - https://harness-apps.github.io/fruits-app/fruits-api-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-10-20T12:37:31.211291+05:30"

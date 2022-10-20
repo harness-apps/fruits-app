@@ -18,6 +18,7 @@ steps:
   commands:
   - apk add --update make
   - make publish
+  - make lint
 
 - name: push
   image: appleboy/drone-git-push
@@ -27,5 +28,5 @@ steps:
     remote: git@github.com:harness-apps/fruits-app.git
     commit: true
     commit_message: update charts [CI SKIP]
-    ssh_key:
-      from_secret: ssh_deploy_key
+    # ssh_key:
+    #   from_secret: ssh_deploy_key
