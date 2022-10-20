@@ -4,3 +4,5 @@ secrets
 
 # Chart dependencies
 **/charts/*.tgz
+
+test-commands.txt
