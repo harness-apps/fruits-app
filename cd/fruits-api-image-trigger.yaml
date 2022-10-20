@@ -1,0 +1,49 @@
+trigger:
+  name: mongodb-dockerhub
+  identifier: dockerhub
+  enabled: true
+  orgIdentifier: default
+  projectIdentifier: googleclouddemos
+  pipelineIdentifier: fruitsapi
+  source:
+    type: Artifact
+    spec:
+      stageIdentifier: Deploy_to_Kube
+      type: DockerRegistry
+      spec:
+        imagePath: kameshsampath/fruits-api
+        tag: <+trigger.artifact.build>
+      artifactRef: primary
+  inputYaml: |
+    pipeline:
+      identifier: fruitsapi
+      stages:
+        - stage:
+            identifier: Deploy_to_Kube
+            type: Deployment
+            spec:
+              serviceConfig:
+                serviceDefinition:
+                  type: NativeHelm
+                  spec:
+                    manifests:
+                      - manifest:
+                          identifier: fruits-api-helm
+                          type: HelmChart
+                          spec:
+                            chartVersion: 0.0.4
+                      - manifest:
+                          identifier: Fruits API Helm Values
+                          type: Values
+                          spec:
+                            store:
+                              type: Github
+                              spec:
+                                paths:
+                                  - helm_vars/fruits-api/mongodb_demo_values.yaml
+                    artifacts:
+                      primary:
+                        type: DockerRegistry
+                        spec:
+                          imagePath: kameshsampath/fruits-api
+                          tag: <+trigger.artifact.build>

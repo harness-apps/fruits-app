@@ -1,0 +1,38 @@
+inputSet:
+  name: Demo_MongoDB_Image_Trigger
+  tags: {}
+  identifier: Demo_MongoDB
+  orgIdentifier: default
+  projectIdentifier: googleclouddemos
+  pipeline:
+    identifier: fruitsapi
+    stages:
+      - stage:
+          identifier: Deploy_to_Kube
+          type: Deployment
+          spec:
+            serviceConfig:
+              serviceDefinition:
+                type: NativeHelm
+                spec:
+                  manifests:
+                    - manifest:
+                        identifier: fruits-api-helm
+                        type: HelmChart
+                        spec:
+                          chartVersion: 0.0.5
+                    - manifest:
+                        identifier: Fruits API Helm Values
+                        type: Values
+                        spec:
+                          store:
+                            type: Github
+                            spec:
+                              paths:
+                                - helm_vars/fruits-api/mongodb_demo_values.yaml
+                  artifacts:
+                    primary:
+                      type: DockerRegistry
+                      spec:
+                        imagePath: kameshsampath/fruits-api
+                        tag: <+trigger.artifact.build>

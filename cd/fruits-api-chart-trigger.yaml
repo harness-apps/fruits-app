@@ -1,0 +1,52 @@
+trigger:
+  name: new chart
+  identifier: new_chart
+  enabled: false
+  orgIdentifier: default
+  projectIdentifier: googleclouddemos
+  pipelineIdentifier: fruitsapi
+  source:
+    type: Manifest
+    spec:
+      stageIdentifier: Deploy_to_Kube
+      manifestRef: fruits-api-helm
+      type: HelmChart
+      spec:
+        chartVersion: <+trigger.manifest.version>
+        store:
+          type: Http
+          spec:
+            connectorRef: Fruits_App
+  inputYaml: |
+    pipeline:
+      identifier: fruitsapi
+      stages:
+        - stage:
+            identifier: Deploy_to_Kube
+            type: Deployment
+            spec:
+              serviceConfig:
+                serviceDefinition:
+                  type: NativeHelm
+                  spec:
+                    manifests:
+                      - manifest:
+                          identifier: fruits-api-helm
+                          type: HelmChart
+                          spec:
+                            chartVersion: <+trigger.manifest.version>
+                      - manifest:
+                          identifier: Fruits API Helm Values
+                          type: Values
+                          spec:
+                            store:
+                              type: Github
+                              spec:
+                                paths:
+                                  - helm_vars/fruits-api/mongodb_demo_values.yaml
+                    artifacts:
+                      primary:
+                        type: DockerRegistry
+                        spec:
+                          imagePath: kameshsampath/fruits-api
+                          tag: 0.1.7

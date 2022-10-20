@@ -1,0 +1,79 @@
+pipeline:
+  name: fruits-api
+  identifier: fruitsapi
+  projectIdentifier: googleclouddemos
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Deploy to Kube
+        identifier: Deploy_to_Kube
+        description: ""
+        type: Deployment
+        spec:
+          serviceConfig:
+            serviceRef: fruitsapi
+            serviceDefinition:
+              spec:
+                variables: []
+                manifests:
+                  - manifest:
+                      identifier: fruits-api-helm
+                      type: HelmChart
+                      spec:
+                        store:
+                          type: Http
+                          spec:
+                            connectorRef: Fruits_App
+                        chartName: fruits-api
+                        chartVersion: <+input>
+                        helmVersion: V3
+                        skipResourceVersioning: false
+                  - manifest:
+                      identifier: Fruits API Helm Values
+                      type: Values
+                      spec:
+                        store:
+                          type: Github
+                          spec:
+                            connectorRef: HarnessAppsGitHub
+                            gitFetchType: Branch
+                            paths: <+input>
+                            repoName: fruits-app-demo-helm-values
+                            branch: main
+                artifacts:
+                  primary:
+                    spec:
+                      connectorRef: DockerHub
+                      imagePath: <+input>
+                      tag: <+input>
+                    type: DockerRegistry
+              type: NativeHelm
+          infrastructure:
+            environmentRef: Demo
+            infrastructureDefinition:
+              type: KubernetesGcp
+              spec:
+                connectorRef: HarnessMktPlay
+                cluster: asia-south1-b/kameshs-demos
+                namespace: fruits-app
+                releaseName: fruits-api
+            allowSimultaneousDeployments: false
+          execution:
+            steps:
+              - step:
+                  type: HelmDeploy
+                  name: Deploy
+                  identifier: Deploy
+                  spec:
+                    skipDryRun: false
+                    ignoreReleaseHistFailStatus: false
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
