@@ -28,13 +28,15 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           envFrom:
+            - secretRef:
+                name: {{ include "fruits-api.dbConnectionSecret" .}}
           {{- range .Values.extraSecretNamesForEnvFrom }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.repository }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

@@ -56,3 +56,11 @@ Create the name of the service account to use
 {{- define "fruits-api.serviceAccountName" -}}
 {{- default (include "fruits-api.fullname" .) .Values.serviceAccount.name }}
 {{- end }}
+
+{{/*
+Create the name of the db-connection secret
+*/}}
+{{- define "fruits-api.dbConnectionSecret" -}}
+{{- printf "%s-db-connection-credentials" (include "fruits-api.fullname" .) }}
+{{- end }}
+

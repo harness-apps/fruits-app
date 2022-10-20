@@ -14,6 +14,10 @@ dockercfg: ""
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+# the mongodb connection string to use with Fruits API when using MongoDB backend in the form of `envKey:envValue` format
+mongoDBConnectionParams: {}
+# regular RDBMS connection parameters as environment variables
+dbConnectionParams: {}
 extraSecretNamesForEnvFrom: []
 # - mongodb-connection-secret
 # - db-connection-secret
