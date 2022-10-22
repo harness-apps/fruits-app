@@ -6,8 +6,12 @@ Helm Charts that will be used for demoing Harness CI/CD,
 
 ## Available Charts
 
-- [] Fruits API - this allows to deploy the [Fruits REST API](https://github.com/harness-apps/fruits-api)
-- [] Fruits App UI - this allows to deploy the [Fruits App UI](https://github.com/harness-apps/fruits-ui)
+- [x] [Fruits API](./charts/fruits-api/README.md) - this allows to deploy the Fruits API
+
+  - [Java Fruits REST API](https://github.com/harness-apps/java-fruits-api)
+  - [Go Fruits REST API](https://github.com/harness-apps/go-fruits-api)
+
+- [ ] Fruits App UI - this allows to deploy the [Fruits App UI](https://github.com/harness-apps/fruits-ui)
   
 ## Add Chart Repository
 
