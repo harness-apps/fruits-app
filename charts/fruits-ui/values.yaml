@@ -55,16 +55,16 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-probes: {}
+probes:
   # It is recommended to have liveness and readiness probes defined to have proper update of applications without service disruptions
-  # livenessProbe:
-  #   httpGet:
-  #     path: /
-  #     port: http
-  # readinessProbe:
-  #   httpGet:
-  #     path: /
-  #     port: http
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
 
 nodeSelector: {}
 
