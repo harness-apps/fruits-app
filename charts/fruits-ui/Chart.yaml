@@ -3,7 +3,7 @@ name: fruits-ui
 description: |
   Helm Charts that will be used to deploy fruits AppUI. The fruits UI will be used to demonstrate various features of Harness CI/CD and connect the UI deployment to a backend service
 type: application
-version: 0.0.1
+version: 0.0.2
 appVersion: "1.0.0"
 home: https://github.com/harness-apps/fruits-app
 sources:

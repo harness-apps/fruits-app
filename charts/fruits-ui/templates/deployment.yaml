@@ -32,7 +32,7 @@ spec:
           image: "{{ .Values.image.repository }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
-          - secretRef:
+          - configMapRef:
               name:  {{ include "fruits-ui.fullname" . }}
           ports:
             - name: http

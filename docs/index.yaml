@@ -21,10 +21,10 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2022-10-25T21:57:27.39222+05:30"
+    created: "2022-10-26T08:52:03.557144+05:30"
     description: 'Helm Charts that will be used to deploy fruits app(API,UI). The
       fruits app will be used to demonstrate various features of Harness CI/CD. '
-    digest: 222d20bb8f5a4a7cbdef8774010f60385038aaa69eb6dc30d42ea2dbabb0e694
+    digest: b5a7267aa609352907c48af7ecec4a23a71526ac2b5bd8b753f98ea7baf24ea3
     home: https://github.com/harness-apps/fruits-app
     maintainers:
     - email: kamesh.sampath@harness.io
@@ -114,6 +114,25 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-10-26T08:52:03.557732+05:30"
+    description: 'Helm Charts that will be used to deploy fruits AppUI. The fruits
+      UI will be used to demonstrate various features of Harness CI/CD and connect
+      the UI deployment to a backend service '
+    digest: 29191121013c25c8185c5acba06cae199ba9dc17e1f74efbcd5fcbb371b548e7
+    home: https://github.com/harness-apps/fruits-app
+    maintainers:
+    - email: kamesh.sampath@harness.io
+      name: Kamesh
+    name: fruits-ui
+    sources:
+    - https://github.com/harness-apps/fruits-ui
+    - https://github.com/harness-apps/fruits-app
+    type: application
+    urls:
+    - https://harness-apps.github.io/fruits-app/fruits-ui-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-10-25T21:57:27.392798+05:30"
     description: 'Helm Charts that will be used to deploy fruits AppUI. The fruits
       UI will be used to demonstrate various features of Harness CI/CD and connect
@@ -131,4 +150,4 @@ entries:
     urls:
     - https://harness-apps.github.io/fruits-app/fruits-ui-0.0.1.tgz
     version: 0.0.1
-generated: "2022-10-25T21:57:27.391441+05:30"
+generated: "2022-10-26T08:52:03.556083+05:30"
