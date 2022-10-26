@@ -1,0 +1,63 @@
+pipeline:
+  name: fruits-ui
+  identifier: fruitsui
+  projectIdentifier: googleclouddemos
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Deploy to Kube
+        identifier: Deploy_to_Kube
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: NativeHelm
+          service:
+            serviceRef: fruitsui
+            serviceInputs:
+              serviceDefinition:
+                type: NativeHelm
+                spec:
+                  manifests:
+                    - manifest:
+                        identifier: fruits-ui-helm
+                        type: HelmChart
+                        spec:
+                          chartVersion: <+input>
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: Demo
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: GKE
+                inputs:
+                  identifier: GKE
+                  type: KubernetesGcp
+                  spec:
+                    namespace: <+input>
+          execution:
+            steps:
+              - step:
+                  name: Helm Deployment
+                  identifier: helmDeployment
+                  type: HelmDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+            rollbackSteps:
+              - step:
+                  name: Helm Rollback
+                  identifier: helmRollback
+                  type: HelmRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback

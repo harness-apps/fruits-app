@@ -1,0 +1,41 @@
+inputSet:
+  name: Defaults
+  tags: {}
+  identifier: Defaults
+  orgIdentifier: default
+  projectIdentifier: googleclouddemos
+  pipeline:
+    identifier: fruitsui
+    stages:
+      - stage:
+          identifier: Deploy_to_Kube
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: NativeHelm
+                  spec:
+                    manifests:
+                      - manifest:
+                          identifier: fruits-ui-helm
+                          type: HelmChart
+                          spec:
+                            chartVersion: 0.0.2
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: Primary
+                        sources:
+                          - identifier: Primary
+                            type: DockerRegistry
+                            spec:
+                              imagePath: kameshsampath/fruits-ui
+                              tag: <+trigger.artifact.build>
+            environment:
+              infrastructureDefinitions:
+                - identifier: GKE
+                  inputs:
+                    identifier: GKE
+                    type: KubernetesGcp
+                    spec:
+                      namespace: fruits-app
