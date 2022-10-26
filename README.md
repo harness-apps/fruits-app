@@ -21,3 +21,4 @@ helm repo update
 ```
 
 - [Install Fruits API](./charts/fruits-api/README.md)
+- [Install Fruits UI](./charts/fruits-ui/README.md)
